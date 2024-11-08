@@ -3,7 +3,7 @@
 # license that can be found in the LICENSE file.
 import decimal
 import os
-from typing import TypeVar
+from typing import List, TypeVar
 
 from m3u8.mixins import BasePathMixin, GroupedBasePathMixin
 from m3u8.parser import format_date_time, parse
@@ -453,7 +453,7 @@ class M3U8:
 T = TypeVar("T")
 
 
-class TagList(list[T]):
+class TagList(List[T]):
     def __str__(self):
         output = [str(tag) for tag in self]
         return "\n".join(output)
@@ -716,7 +716,7 @@ class Segment(BasePathMixin):
             self.init_section.base_uri = newbase_uri
 
 
-class SegmentList(list[Segment], GroupedBasePathMixin):
+class SegmentList(List[Segment], GroupedBasePathMixin):
     def dumps(self, timespec="milliseconds", infspec="auto"):
         output = []
         last_segment = None
@@ -831,7 +831,7 @@ class PartialSegment(BasePathMixin):
         return self.dumps(None)
 
 
-class PartialSegmentList(list[PartialSegment], GroupedBasePathMixin):
+class PartialSegmentList(List[PartialSegment], GroupedBasePathMixin):
     def __str__(self):
         output = [str(part) for part in self]
         return "\n".join(output)
@@ -1314,7 +1314,7 @@ class RenditionReport(BasePathMixin):
         return self.dumps()
 
 
-class RenditionReportList(list[RenditionReport], GroupedBasePathMixin):
+class RenditionReportList(List[RenditionReport], GroupedBasePathMixin):
     def __str__(self):
         output = [str(report) for report in self]
         return "\n".join(output)
